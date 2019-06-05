@@ -1,9 +1,11 @@
-from bs4 import BeautifulSoup
+
+import user_agent
 import requests
-if __name__ == "__main__":
-     target = 'https://read.qidian.com/chapter/atk0lq-ecYzdjrstIrF5-w2/HQkBFKNYNur4p8iEw--PPw2'
-     req = requests.get(url = target)
-     html = req.text
-     bf = BeautifulSoup(html)
-     texts = bf.find_all('div', class_ = 'read-content j_readContent') 
-print(texts)
+import re
+
+headers = user_agent.user_agent('chrome')
+r = requests.get("https://www.zhihu.com/explore",headers = headers )
+pattern = re.compile('explore-feed.*?question_link.*?(.*?)</a>', re.S)
+titles = re.findall(pattern, r.text)
+print(titles)
+print(headers)
