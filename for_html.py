@@ -2,6 +2,8 @@ import urllib.request
 import user_agent
 import re
 
+# get html method using urllib
+
 def get_html(url, browser):
     headers = user_agent.user_agent(browser)
     req = urllib.request.Request(url = url, headers = headers)
