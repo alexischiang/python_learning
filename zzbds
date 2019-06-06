@@ -1,0 +1,18 @@
+"""需要改正"""
+# # 正则表达式：
+# # 排名 group1
+# rank_re = '<dd>.*?<i.*?>(.*?)</i>'
+# # 提取图片 group2
+# pic_re = '.*?data-src="(.*?)"'
+# # 电影名称 group3
+# name_re = '.*?class="name".*?title="(.*?)"'
+# # 主演 group4
+# actor_re = '.*?class="star".*?>(.*?)</p>'
+# # 上映时间 group5
+# release_time_re = '.*?class="releasetime">(.*?)</p>'
+# # 评分整数 group6
+# rating_int_re = '.*?class="integer">(.*?)</i>'
+# # 评分小数 group7
+# rating_fra_re = '.*?class="fraction">(*?)</i>.*?</dd>'
+# # total
+# # re_str = rank_re + pic_re + name_re + actor_re + release_time_re + rating_int_re + rating_fra_re
