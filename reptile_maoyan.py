@@ -16,10 +16,8 @@ def main():
     html = get_one_page(url, 'chrome')
     return html
 
-def parse_one_page(html):
-    pattern = re.compile('<dd>.*?board-index.*?>(\d+)</i>.*?data-src="(.*?)".*?name"><a'
-                         + '.*?>(.*?)</a>.*?star">(.*?)</p>.*?releasetime">(.*?)</p>'
-                         + '.*?integer">(.*?)</i>.*?fraction">(.*?)</i>.*?</dd>', re.S)
+def parse_one_page(html,re_str):
+    pattern = re.compile(re_str, re.S)
     items = re.findall(pattern, html)
     for item in items:
         yield {
@@ -33,7 +31,7 @@ def parse_one_page(html):
 
 
 
-
+"""需要改正"""
 # # 正则表达式：
 # # 排名 group1
 # rank_re = '<dd>.*?<i.*?>(.*?)</i>'
@@ -50,8 +48,11 @@ def parse_one_page(html):
 # # 评分小数 group7
 # rating_fra_re = '.*?class="fraction">(*?)</i>.*?</dd>'
 # # total
-# re_str = rank_re + pic_re + name_re + actor_re + release_time_re + rating_int_re + rating_fra_re
+# # re_str = rank_re + pic_re + name_re + actor_re + release_time_re + rating_int_re + rating_fra_re
+
+re_str = '<dd>.*?board-index.*?>(\d+)</i>.*?data-src="(.*?)".*?name"><a'+ '.*?>(.*?)</a>.*?star">(.*?)</p>.*?releasetime">(.*?)</p>'+ '.*?integer">(.*?)</i>.*?fraction">(.*?)</i>.*?</dd>'
+
 
 html = main()
-for index in parse_one_page(html):
+for index in parse_one_page(html,re_str):
     print(index)
