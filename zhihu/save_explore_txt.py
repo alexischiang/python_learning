@@ -20,3 +20,4 @@ for item in items:
     file.write('\n'.join([question]))
     file.write('\n' + '='*50 + '\n')
     file.close
+
