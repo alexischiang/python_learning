@@ -28,6 +28,4 @@ except:
     # 因为首次运行还没有cookie，所有会出现 LoadError 异常。
     print('load cookies failed')
 
-
-def get_xsrf():
-    
+ 
