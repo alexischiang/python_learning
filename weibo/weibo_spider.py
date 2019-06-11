@@ -11,7 +11,6 @@ import json
 base_url = 'https://m.weibo.cn/api/container/getIndex?'
 
 headers = {
-    'Host' : 'm.weibo.cn',
     'Referer' : 'https://m.weibo.cn/p/2304132611891653_-_WEIBO_SECOND_PROFILE_WEIBO',
     'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
     'X-Requested-With' : 'XMLHttpRequest'
@@ -45,6 +44,7 @@ def parse_page(json):
             weibo['attitudes'] = item.get('attitudes_count')
             weibo['comments'] = item.get('comment_count')
             weibo['reports'] = item.get('reports_count')
+            weibo['retweeted'] = item.get('retweeted_status')
             yield weibo
 
 if __name__ == "__main__":
@@ -55,5 +55,9 @@ if __name__ == "__main__":
         for result in results:
             if '陈霸彪' in result.get('text'):
                 count += 1
-            print(result)
-    print('你在前10页微博里提到了@都市丽人陈霸彪'+ str(count) +'次！\n')
+            if result.get('retweeted'):
+                retweet = 1
+            else:
+                print(result)
+        retweet = 0
+    print('你在前10页原创微博里提到了@都市丽人陈霸彪'+ str(count) +'次！\n')
