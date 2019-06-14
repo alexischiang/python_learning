@@ -12,7 +12,7 @@ import csv
 base_url = 'https://m.weibo.cn/api/container/getIndex?'
 
 headers = {
-    'Referer' : 'https://m.weibo.cn/u/2162509662',
+    'Referer' : 'https://m.weibo.cn/u/',
     'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
     'X-Requested-With' : 'XMLHttpRequest'
 }
@@ -46,7 +46,7 @@ def parse_page(json):
             weibo['comments'] = item.get('comments_count')
             weibo['reports'] = item.get('reports_count')
             weibo['retweeted'] = item.get('retweeted_status')
-            yield weibo
+            yield weibo #每条微博的所有信息保存成一个字典
 
 if __name__ == "__main__":
     count = 0  
@@ -56,7 +56,7 @@ if __name__ == "__main__":
         for result in results:
             # 返回原创微博 即retweeted值为none
             if result.get('retweeted') == None:
-                with open('data.csv','a', encoding= 'utf-8') as csvfile:
+                with open('data.csv','a', encoding= 'utf-8') as csvfile: # 读一条存一条
                     fieldnames = ['id','text','attitudes','comments','reports','retweeted']
                     writer = csv.DictWriter(csvfile, fieldnames = fieldnames)
                     writer.writeheader()
